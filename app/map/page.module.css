@@ -1,0 +1,48 @@
+.mapPage {
+	position: relative;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+  }
+  
+  .mapContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+  }
+  
+  .promptBox {
+	position: absolute;
+	bottom: 40px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: white;
+	border: 1px solid var(--color-gray);
+	padding: var(--space-md);
+	border-radius: var(--radius-md);
+	font-size: var(--font-size-sm);
+	z-index: 10;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .truckMarker {
+	width: 60px;
+	height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+  
+  .truckIcon {
+	width: 80px;
+	height: 80px;
+	object-fit: contain;
+	pointer-events: none;
+  }
+  

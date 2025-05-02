@@ -56,28 +56,31 @@
 
 /* === Best Practices Reset === */
 
-/* 1. Use border-box for consistent sizing (yes, highly recommended) */
-/* 5. Prevent layout shifts caused by fonts or elements */
+/* Use border-box for consistent sizing (yes, highly recommended) */
+/* Prevent layout shifts caused by fonts or elements */
 *, *::before, *::after {
   box-sizing: border-box;
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
 }
 
-/* 2. Remove default margin and padding from html/body */
 html, body {
   margin: 0;
   padding: 0;
-  min-width: 320px;     /* Prevent layout collapse on tiny screens */
-  min-height: 100vh;    /* Make sure body always fills viewport */
-  background: var(--color-white);
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-white);
   color: var(--color-black);
-  font-family: var(--font-geist-sans, Arial, sans-serif);
-  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
-/* 4. Make images scale nicely */
+/* Make images scale nicely */
 img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
@@ -90,10 +93,10 @@ input, button, textarea, select {
   color: inherit;
 }
 
-/* 7. Default layout container (optional but helpful) */
-#__next {
+.app-wrapper {
+  flex: 1;
+  position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  border: 5px solid red
 }
-

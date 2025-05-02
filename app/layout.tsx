@@ -1,21 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import ClientLayout from "@/components/navigation/ClientLayout";
 import { ToastContainer } from "react-toastify";
 import ClerkAndConvexProvider from "@/providers/ClerkAndConvexProvider";
 import PublicNavBar from "@/components/navigation/PublicNavBar";
-
-const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
-    subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -31,12 +20,12 @@ export default function RootLayout({
         <html lang="en">
             {/* ✅ Step 1b: Wrap app in ClerkProvider */}
             <ClerkAndConvexProvider>
-                <body
-                    className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-                >
-					<PublicNavBar />
-                    <ClientLayout>{children}</ClientLayout>
-                    <ToastContainer position="top-center" />
+                <body>
+                    <div className="app-wrapper">
+                        <PublicNavBar />
+                        <ClientLayout>{children}</ClientLayout>
+                        <ToastContainer position="top-center" />
+                    </div>
                 </body>
             </ClerkAndConvexProvider>
         </html>

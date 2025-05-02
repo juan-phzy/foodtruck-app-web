@@ -232,3 +232,33 @@ export const getTrucksInViewport = query({
         return filteredTrucks;
     },
 });
+
+export const getTrucksInViewportPublic = query({
+    args: {
+        topLat: v.number(),
+        bottomLat: v.number(),
+        leftLng: v.number(),
+        rightLng: v.number(),
+    },
+    handler: async (ctx, args) => {
+        const { topLat, bottomLat, leftLng, rightLng } = args;
+
+        const trucks = await ctx.db.query("trucks").collect();
+
+        // Only return trucks whose lat/lng is inside the viewport
+        const filteredTrucks = trucks.filter((truck) => {
+            if (truck.latitude === undefined || truck.longitude === undefined) {
+                return false; // skip if missing lat/lng
+            }
+
+            return (
+                truck.latitude <= topLat &&
+                truck.latitude >= bottomLat &&
+                truck.longitude >= leftLng &&
+                truck.longitude <= rightLng
+            );
+        });
+
+        return filteredTrucks;
+    },
+});
