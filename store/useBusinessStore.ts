@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { useEffect } from "react";
-import { useAuth, } from "@clerk/clerk-expo";
+import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Business } from "@/types";
@@ -8,7 +8,7 @@ import { Business } from "@/types";
 type BusinessStore = {
     business: Business | null;
     isLoading: boolean;
-    setBusiness: (business: any) => void;
+    setBusiness: (business: Business) => void;
     setLoading: (loading: boolean) => void;
 };
 

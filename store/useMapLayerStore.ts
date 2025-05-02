@@ -1,14 +1,14 @@
-import { create } from "zustand";
-import Mapbox from "@rnmapbox/maps";
+// import { create } from "zustand";
+// import Mapbox from "@rnmapbox/maps";
 
-interface MapLayerState {
-    mapStyle: string;
-    setMapStyle: (style: string) => void;
-}
+// interface MapLayerState {
+//     mapStyle: string;
+//     setMapStyle: (style: string) => void;
+// }
 
-const useMapLayerStore = create<MapLayerState>((set) => ({
-    mapStyle: Mapbox.StyleURL.Street,
-    setMapStyle: (style) => set({ mapStyle: style }),
-}));
+// const useMapLayerStore = create<MapLayerState>((set) => ({
+//     mapStyle: Mapbox.StyleURL.Street,
+//     setMapStyle: (style) => set({ mapStyle: style }),
+// }));
 
-export default useMapLayerStore;
+// export default useMapLayerStore;
