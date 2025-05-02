@@ -1,26 +1,99 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* === Colors === */
+  --color-primary: rgba(255, 132, 0, 1);
+  --color-primary-inactive: rgba(255, 132, 0, 0.5);
+  --color-primary-light: rgba(255, 243, 230, 1);
+  --color-primary-extra-light: rgb(255, 251, 246);
+
+  --color-black: rgba(0, 0, 0, 1);
+  --color-black-inactive: rgba(0, 0, 0, 0.5);
+
+  --color-gray-dark: rgba(120, 120, 120, 1);
+  --color-gray-dark-inactive: rgba(120, 120, 120, 0.5);
+  --color-gray: rgba(221, 221, 221, 1);
+  --color-gray-inactive: rgba(221, 221, 221, 0.5);
+  --color-gray-light: rgba(249, 249, 249, 1);
+
+  --color-white: rgba(255, 255, 255, 1);
+  --color-white-inactive: rgba(255, 255, 255, 0.5);
+
+  --color-green: rgba(0, 128, 0, 1);
+  --color-green-light: rgb(0, 199, 0);
+
+  --color-red: rgba(255, 0, 0, 1);
+  --color-brown: rgba(139, 69, 19, 1);
+
+  /* === Font Sizes === */
+  --font-size-xxs: 0.625rem;  /* 10px */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-md: 1rem;       /* 16px */
+  --font-size-lg: 1.25rem;    /* 20px */
+  --font-size-xl: 1.5rem;     /* 24px */
+  --font-size-xxl: 1.75rem;   /* 28px */
+  --font-size-xxxl: 2.5rem;   /* 40px */
+  --font-size-xxxxl: 3rem;    /* 48px */
+
+  /* === Spacing (Padding) === */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 10px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 20px;
+  --space-xxl: 24px;
+  --space-xxxl: 28px;
+  --space-xxxxl: 35px;
+
+  /* === Border Radius === */
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 15px;
+  --radius-full: 20px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* === Best Practices Reset === */
+
+/* 1. Use border-box for consistent sizing (yes, highly recommended) */
+/* 5. Prevent layout shifts caused by fonts or elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 2. Remove default margin and padding from html/body */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;     /* Prevent layout collapse on tiny screens */
+  min-height: 100vh;    /* Make sure body always fills viewport */
+  background: var(--color-white);
+  color: var(--color-black);
+  font-family: var(--font-geist-sans, Arial, sans-serif);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* 4. Make images scale nicely */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
+
+/* 6. Improve form element appearance consistency */
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+/* 7. Default layout container (optional but helpful) */
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+

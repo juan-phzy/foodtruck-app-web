@@ -1,0 +1,76 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--space-xl);
+    background-color: var(--color-white);
+    color: var(--color-black);
+}
+
+.hero {
+    max-width: 720px;
+    text-align: center;
+}
+
+.title {
+    font-size: var(--font-size-xxxl);
+    font-weight: bold;
+    margin-bottom: var(--space-md);
+}
+
+.subtitle {
+    font-size: var(--font-size-md);
+    color: var(--color-gray-dark);
+    margin-bottom: var(--space-xl);
+}
+
+.ctaGroup {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+}
+
+.primaryBtn,
+.secondaryBtn {
+    text-decoration: none;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    font-size: var(--font-size-sm);
+    transition: background 0.2s ease;
+}
+
+.primaryBtn {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.primaryBtn:hover {
+    background-color: var(--color-primary-inactive);
+}
+
+.secondaryBtn {
+    background-color: var(--color-gray);
+    color: var(--color-black);
+}
+
+.secondaryBtn:hover {
+    background-color: var(--color-gray-inactive);
+}
+
+.signInPrompt {
+    margin-top: var(--space-lg);
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-dark);
+}
+
+.signInLink {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.signInLink:hover {
+    text-decoration: underline;
+}
