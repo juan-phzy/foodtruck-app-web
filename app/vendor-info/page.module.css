@@ -1,0 +1,120 @@
+.container {
+    padding: var(--space-xl);
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xxl);
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heroContent {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xl);
+    width: 100%;
+}
+
+.text {
+    flex: 1 1 400px;
+    text-align: left;
+}
+
+.heading {
+    font-size: var(--font-size-xxxl);
+    font-weight: bold;
+    margin-bottom: var(--space-md);
+}
+
+.subtext {
+    font-size: var(--font-size-md);
+    color: var(--color-gray-dark);
+    max-width: 700px;
+}
+
+.imageWrapper {
+    flex: 0 0 auto;
+    width: 300px;
+}
+
+.image {
+    border-radius: var(--radius-md);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.ctaWrapper {
+    margin-top: var(--space-xl);
+}
+
+.ctaButton {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--space-sm) var(--space-xl);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    transition: background 0.2s ease;
+}
+
+.ctaButton:hover {
+    background-color: var(--color-primary-inactive);
+}
+
+/* Features section using flex instead of grid */
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-xl);
+    width: 100%;
+}
+
+.featureCard {
+    flex: 1 1 250px;
+    max-width: 300px;
+    background: var(--color-white);
+    border: 1px solid var(--color-gray);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.featureCard:hover {
+    transform: translateY(-4px);
+}
+
+.featureCard h2 {
+    font-size: var(--font-size-lg);
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.featureCard p {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-dark);
+}
+
+@media (max-width: 768px) {
+    .text {
+      text-align: center;
+      align-items: center;
+    }
+  
+    .ctaWrapper {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  
