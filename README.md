@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project Structure
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+FOODTRUCK-APP-WEB
+│
+│── .next      
+│
+├── app
+|   ├── (public)
+│   │   ├── map
+│   |   │   ├── page.module.css
+│   |   │   └── page.tsx
+│   │   └── vendor-info
+│   |       ├── page.module.css
+│   |       └── page.tsx
+|   ├── auth
+│   │   └── sign-in
+│   |       ├── page.module.css
+│   |       └── page.tsx
+|   ├── user
+│   │   ├── account
+│   |   │   ├── page.module.css
+│   |   │   └── page.tsx
+│   │   ├── map
+│   |   │   ├── page.module.css
+│   |   │   └── page.tsx
+│   │   └── search
+│   |       ├── page.module.css
+│   |       └── page.tsx
+|   ├── vendor
+│   │   └── dashboard
+│   |       ├── page.module.css
+│   |       └── page.tsx
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── page.module.css
+│   └── page.tsx
+|
+├── components
+│   └── navigation
+│       ├── ClientLayout.tsx
+│       ├── PublicNavBar.module.css
+│       └── PublicNavBar.tsx
+|
+├── convex                          # Convex Backend Folder
+│   ├── _generated                      # Automatically Generated Server Files
+│   ├── auth.config.ts                  # Auth configuration for convex
+│   ├── businesses.ts                   # Business Mutations / Queries
+│   ├── http.ts
+│   ├── menus.ts                        # Database Menu Mutations / Queries
+│   ├── README.md
+│   ├── schema.ts                       # Database Table Schemas
+│   ├── trucks.ts                       # Truck Mutations / Queries
+│   ├── tsconfig.json                   # Backend TypeScript Configuration
+│   ├── users.ts                        # User Mutations / Queries
+│   └── vendors.ts                      # Vendor Mutations / Queries
+|
+├── node_modules                    # Automatically appears when npm and expo is initialized
+|
+├── providers                       # Context Providers
+|   └── ClerkAndConvexProvider.tsx
+|
+├── public
+|   └── images
+│       ├── placeholder.jpg
+│       └── truck-icon.png
+│
+├── store                           # Contains Zustand custom hooks
+│   ├── useBusinessStore.ts             # State management for signed in business
+│   ├── useFilterStore.ts               # State management for selected category filters
+│   ├── useMapLayerStore.ts             # State management for selected map layer style
+│   ├── useMenuModalStore.ts            # State management for menu toggle
+│   ├── useTruckStore.ts                # State management for selected truck on map
+│   ├── useUserLocationStore.ts         # State management for user device location
+│   ├── useUserOnboardingStore.ts     # State management for vendor creation & onboarding
+│   ├── useUserStore.ts                 # State management for convex user
+│   ├── useVendorOnboardingStore.ts     # State management for vendor creation & onboarding
+│   └── useVendorStore.ts               # State management for vendor
+|
+├── utils                           # Utility Folder
+│   ├── calculateDistance.ts 
+│   ├── convertScheduleArrayToRecord.ts            
+│   └── helperFunctions.ts             
+│
+├── .env.local               # Local environment variables
+│
+├── .gitignore               # List of files to be ignored on github
+│
+├── constants.ts 
+│
+├── eslint.config.mjs
+│
+├── middleware.ts
+│
+├── next-env.d.ts
+│
+├── next.config.ts
+│
+├── package-lock.json
+│
+├── package.json
+│
+├── postcss.config.mjs
+│
+├── README.md
+│
+├── tailwind.config.ts
+│
+├── tsconfig.json
+│
+└── types.ts               
+```

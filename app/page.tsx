@@ -14,7 +14,7 @@ export default function HomePage() {
                 </p>
 
                 <div className={styles.ctaGroup}>
-                    <Link href="/auth/signup" className={styles.primaryBtn}>
+                    <Link href="/auth/sign-up" className={styles.primaryBtn}>
                         Sign Up
                     </Link>
                     <Link href="/map" className={styles.secondaryBtn}>
@@ -24,7 +24,7 @@ export default function HomePage() {
 
                 <p className={styles.signInPrompt}>
                     Already have an account?{" "}
-                    <Link href="/auth/signin" className={styles.signInLink}>
+                    <Link href="/auth/sign-in" className={styles.signInLink}>
                         Sign In
                     </Link>
                 </p>

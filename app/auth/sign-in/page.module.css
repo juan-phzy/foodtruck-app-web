@@ -1,0 +1,104 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: var(--space-xl);
+    background-color: var(--color-background, #fafafa);
+}
+
+.card {
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray);
+    border-radius: var(--radius-md);
+    padding: var(--space-xl);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+    font-size: var(--font-size-xl);
+    font-weight: bold;
+    margin-bottom: var(--space-sm);
+    text-align: center;
+}
+
+.subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-dark);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.label {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-dark);
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    margin-top: var(--space-xs);
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-gray);
+    font-size: var(--font-size-sm);
+}
+
+.button {
+    margin-top: var(--space-md);
+    padding: var(--space-sm);
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.button:hover {
+    background-color: var(--color-primary-inactive);
+}
+
+.linkText {
+    margin-top: var(--space-lg);
+    font-size: var(--font-size-sm);
+    text-align: center;
+}
+
+.link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: red;
+    font-size: var(--font-size-sm);
+    margin-top: var(--space-xs);
+    text-align: center;
+}
+
+.switchRole {
+    margin-top: var(--space-md);
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
