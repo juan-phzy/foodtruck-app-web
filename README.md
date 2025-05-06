@@ -38,10 +38,13 @@ FOODTRUCK-APP-WEB
 │   └── page.tsx
 |
 ├── components
-│   └── navigation
-│       ├── ClientLayout.tsx
-│       ├── PublicNavBar.module.css
-│       └── PublicNavBar.tsx
+│   ├── navigation
+│   |   ├── ClientLayout.tsx
+│   |   ├── PublicNavBar.module.css
+│   |   └── PublicNavBar.tsx
+│   └── landing
+│       ├── Footer.module.css
+│       └── Footer.tsx
 |
 ├── convex                          # Convex Backend Folder
 │   ├── _generated                      # Automatically Generated Server Files

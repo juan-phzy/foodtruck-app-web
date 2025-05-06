@@ -6,59 +6,102 @@ import { useUser, useAuth } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
-export default function ClientLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const { isLoaded, isSignedIn } = useAuth();
-  const { user } = useUser();
-  const router = useRouter();
-  const pathname = usePathname();
+// Define route access patterns more explicitly
+const PUBLIC_ROUTES = ["/", "/map", "/vendor-info"];
+const AUTH_ROUTES = ["/auth", "/auth/sign-in", "/auth/sign-up"];
+const USER_ROUTES = ["/user"];
+const VENDOR_ROUTES = ["/vendor"];
+const ONBOARDING_ROUTE = "/auth/createBusiness/step6";
 
-  const role = user?.unsafeMetadata?.role;
+export default function ClientLayout({
+    children,
+}: Readonly<{ children: React.ReactNode }>) {
+    const { isLoaded, isSignedIn } = useAuth();
+    const { user } = useUser();
+    const router = useRouter();
+    const pathname = usePathname();
 
-  const vendorProfile = useQuery(
-    api.vendors.getUserByClerkId,
-    user && role === "vendor" ? { clerkId: user.id } : "skip"
-  );
+    // Extract role from user metadata
+    const role = user?.unsafeMetadata?.role as string | undefined;
 
-  useEffect(() => {
-    if (!isLoaded || !user) return;
+    // Query vendor profile only if user is a vendor
+    const vendorProfile = useQuery(
+        api.vendors.getUserByClerkId,
+        user && role === "vendor" ? { clerkId: user.id } : "skip"
+    );
 
-    const isAuthRoute = pathname?.startsWith("/auth");
-    const isVendorRoute = pathname?.startsWith("/vendor");
-    const isPublicRoute = pathname?.startsWith("/public");
+    // Helper functions to check route permissions
+    const isPublicRoute = (path: string) => {
+        return PUBLIC_ROUTES.some(
+            (route) => path === route || path.startsWith(`${route}/`)
+        );
+    };
 
-    const isUnrestrictedPublicRoute =
-      pathname === "/" ||
-      pathname.startsWith("/map") ||
-      pathname.startsWith("/vendor-info");
+    const isAuthRoute = (path: string) => {
+        return AUTH_ROUTES.some(
+            (route) => path === route || path.startsWith(`${route}/`)
+        );
+    };
 
-    // 1. Unauthenticated users can access public pages
-    if (!isSignedIn) {
-      if (!isAuthRoute && !isUnrestrictedPublicRoute) {
-        router.replace("/auth/signin");
-      }
-      return;
-    }
+    const isUserRoute = (path: string) => {
+        return USER_ROUTES.some(
+            (route) => path === route || path.startsWith(`${route}/`)
+        );
+    };
 
-    // 2. Vendor logic
-    if (role === "vendor") {
-      const isOnboarded = vendorProfile?.is_onboarded;
+    const isVendorRoute = (path: string) => {
+        return VENDOR_ROUTES.some(
+            (route) => path === route || path.startsWith(`${route}/`)
+        );
+    };
 
-      if (isOnboarded === false && !isAuthRoute) {
-        router.replace("/auth/createBusiness/step6");
-        return;
-      }
+    useEffect(() => {
+        // Don't run routing logic until auth is loaded
+        if (!isLoaded) return;
 
-      if (isAuthRoute || isPublicRoute || isUnrestrictedPublicRoute) {
-        router.replace("/vendor/locations");
-        return;
-      }
-    }
+        // 1. Handle unauthenticated users (can only access public & auth routes)
+        if (!isSignedIn) {
+            if (!isPublicRoute(pathname) && !isAuthRoute(pathname)) {
+                router.replace("/auth/sign-in");
+            }
+            return;
+        }
 
-    // 3. Public user logic
-    if (role === "public" && (isAuthRoute || isVendorRoute)) {
-      router.replace("/public");
-    }
-  }, [isLoaded, isSignedIn, user, vendorProfile, pathname]);
+        // 2. Handle vendor users
+        if (role === "vendor") {
+            // 2a. Check if vendor is onboarded, redirect to onboarding if not
+            if (
+                vendorProfile?.is_onboarded === false &&
+                !pathname.startsWith(ONBOARDING_ROUTE)
+            ) {
+                router.replace(ONBOARDING_ROUTE);
+            }
+            // 2b. Vendor users should not access user routes or auth routes when signed in
+            else if (
+                isUserRoute(pathname) ||
+                (isAuthRoute(pathname) &&
+                    !pathname.startsWith(ONBOARDING_ROUTE))
+            ) {
+                router.replace("/vendor/dashboard");
+            }
+        }
+        // 3. Handle public users (general customers)
+        else if (role === "public") {
+            // Public users shouldn't access vendor routes or auth routes when signed in
+            if (isVendorRoute(pathname) || isAuthRoute(pathname)) {
+                router.replace("/user/map");
+            }
+        }
+        // 4. Handle users with no role yet (fallback)
+        else if (
+            !role &&
+            !isAuthRoute(pathname) &&
+            !isPublicRoute(pathname)
+        ) {
+            router.replace("/");
+        }
+    }, [isLoaded, isSignedIn, user, role, vendorProfile, pathname, router]);
 
-  return <>{children}</>;
+    // Simply render children - the routing logic happens in useEffect
+    return <>{children}</>;
 }
