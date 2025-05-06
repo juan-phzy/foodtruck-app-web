@@ -29,7 +29,7 @@ export default function RootLayout({
             <ClerkAndConvexProvider>
                 <body>
                     <div className="app-wrapper">
-                        {/* <PublicNavBar /> */}
+                        <PublicNavBar />
                         <ClientLayout>{children}</ClientLayout>
                         <ToastContainer position="top-center" />
                     </div>
