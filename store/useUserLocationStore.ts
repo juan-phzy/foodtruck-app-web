@@ -1,41 +1,38 @@
-// // store/useUserLocationStore.tsx
+import { create } from "zustand";
+import { Coordinates } from "@/types";
 
-// import { create } from "zustand";
-// import * as Location from "expo-location";
-// import { Coordinates } from "@/types";
+type LocationState = {
+  userLocation: Coordinates | null;
+  setLocation: (coords: Coordinates) => void;
+  fetchUserLocation: () => Promise<void>;
+};
 
-// type LocationState = {
-//     userLocation: Coordinates | null;
-//     setLocation: (coords: Coordinates) => void;
-//     fetchUserLocation: () => Promise<void>;
-// };
+export const useUserLocationStore = create<LocationState>((set) => ({
+  userLocation: null,
 
-// const useUserLocationStore = create<LocationState>((set) => ({
-//     userLocation: null,
-//     setLocation: (coords) => set({ userLocation: coords }),
-//     fetchUserLocation: async () => {
-//         const { status } = await Location.requestForegroundPermissionsAsync();
-//         console.log("Status: ", status);
-//         if (status !== "granted") {
-//             console.warn("Permission denied");
-//             return;
-//         }
+  setLocation: (coords) => {
+    set({ userLocation: coords });
+  },
 
-//         try {
-//             const location = await Location.getCurrentPositionAsync({
-//                 accuracy: Location.Accuracy.High,
-//             });
+  fetchUserLocation: async () => {
+    if (!navigator.geolocation) {
+      console.warn("Geolocation not supported");
+      return;
+    }
 
-//             set({
-//                 userLocation: {
-//                     latitude: location.coords.latitude,
-//                     longitude: location.coords.longitude,
-//                 },
-//             });
-//         } catch (error) {
-//             console.error("Error fetching user location:", error);
-//         }
-//     },
-// }));
-
-// export default useUserLocationStore;
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log("User location fetched:", position.coords);
+        const coords = {
+          latitude: 40.7698219/*position.coords.latitude*/,
+          longitude: -73.9825347/*position.coords.longitude*/,
+        };
+        set({ userLocation: coords });
+      },
+      (error) => {
+        console.error("Error fetching user location:", error.message);
+      },
+      { enableHighAccuracy: true }
+    );
+  },
+}));
