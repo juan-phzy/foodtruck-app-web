@@ -52,6 +52,12 @@
   --radius-md: 10px;
   --radius-lg: 15px;
   --radius-full: 20px;
+  
+  /* === Safe Area Insets === */
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 16px);
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);
 }
 
 /* === Best Practices Reset === */
@@ -64,12 +70,19 @@
   text-rendering: optimizeLegibility;
 }
 
-html, body {
+html {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Standard height */
+  height: 100dvh; /* Dynamic viewport height for modern browsers */
+  width: 100%;
   background-color: var(--color-white);
   color: var(--color-black);
   -webkit-font-smoothing: antialiased;
@@ -78,6 +91,12 @@ html, body {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  overflow: hidden; /* Prevent scrolling on body */
+  position: fixed; /* Fix body to prevent Safari toolbar from causing resize issues */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 /* Make images scale nicely */
@@ -87,7 +106,7 @@ img, picture, video, canvas, svg {
   height: auto;
 }
 
-/* 6. Improve form element appearance consistency */
+/* Improve form element appearance consistency */
 input, button, textarea, select {
   font: inherit;
   color: inherit;
@@ -98,5 +117,34 @@ input, button, textarea, select {
   position: relative;
   display: flex;
   flex-direction: column;
-  border: 5px solid red
+  border: 5px solid red;
+  height: 100%;
+  overflow: hidden;
+  /* Respect safe areas */
+  padding-bottom: var(--safe-area-inset-bottom);
+  padding-top: var(--safe-area-inset-top);
+  padding-left: var(--safe-area-inset-left);
+  padding-right: var(--safe-area-inset-right);
+}
+
+/* Mapbox control styling */
+.mapboxgl-ctrl svg path {
+  fill: var(--color-black);
+}
+
+.mapboxgl-ctrl-attrib-inner a {
+  color: var(--color-gray-dark);
+}
+
+/* Mapbox popup styling */
+.mapboxgl-popup-content {
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mapboxgl-popup-close-button {
+  font-size: 18px;
+  padding: 4px 8px;
+  color: var(--color-gray-dark);
 }
