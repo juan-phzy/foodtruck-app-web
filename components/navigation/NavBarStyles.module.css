@@ -185,6 +185,16 @@
 .signOutBtn {
     display: none; /* Hidden on mobile */
 }
+.activeLink {
+    color: var(--color-primary);
+    background-color: var(--color-primary-extra-light);
+    font-weight: 600;
+}
+
+.activeMobileLink {
+    color: var(--color-primary);
+    font-weight: 600;
+}
 
 /* Tablet and desktop styles */
 @media (min-width: 768px) {
@@ -251,6 +261,21 @@
         background-color: var(--color-gray-light);
         color: var(--color-black);
         transform: translateY(-1px);
+    }
+
+    .activeLink {
+        position: relative;
+    }
+
+    .activeLink::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--color-primary);
+        border-radius: 1px;
     }
 }
 

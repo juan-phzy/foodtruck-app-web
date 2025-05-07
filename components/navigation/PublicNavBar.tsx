@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import styles from "./PublicNavBar.module.css";
+import styles from "./NavBarStyles.module.css";
 import { useUser, useClerk } from "@clerk/nextjs";
 
 export default function PublicNavBar() {
