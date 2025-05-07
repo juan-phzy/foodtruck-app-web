@@ -34,7 +34,7 @@ export default function HomePage() {
                     <div className={styles.heroCta}>
                         {!isSignedIn ? (
                             <>
-                                <Link href="/auth/sign-up" className={styles.primaryBtn}>
+                                <Link href="/auth/sign-up/user" className={styles.primaryBtn}>
                                     Sign Up Free
                                 </Link>
                                 <Link href="/map" className={styles.secondaryBtn}>
@@ -130,7 +130,7 @@ export default function HomePage() {
                         </p>
                         
                         {!isSignedIn ? (
-                            <Link href="/auth/sign-up" className={styles.ctaBtn}>
+                            <Link href="/auth/sign-up/user" className={styles.ctaBtn}>
                                 Get Started Now
                             </Link>
                         ) : (

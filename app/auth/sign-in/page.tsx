@@ -1,40 +1,25 @@
 "use client";
-/*
-    /app/auth/sign-in/page.tsx
-*/
 
-import styles from "./page.module.css";
-import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useClerk } from "@clerk/clerk-react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import Link from "next/link";
+import styles from "./page.module.css";
 
 export default function SignInPage() {
-    const [email, setEmail] = useState("public-user+clerk_test@example.com");
-    const [password, setPassword] = useState("public12345");
-    const [isVendor, setIsVendor] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const [email, setEmail] = useState("+clerk_test@example.com");
+    const [password, setPassword] = useState("public123");
+    const [activeTab, setActiveTab] = useState<"user" | "vendor">("user");
     const [loading, setLoading] = useState(false);
 
     const { isLoaded, signIn } = useSignIn();
     const { setActive } = useClerk();
     const router = useRouter();
 
-    useEffect(() => {
-        if (isVendor) {
-            setEmail("+clerk_test@example.com");
-            setPassword("vendor123");
-        } else {
-            setEmail("+clerk_test@example.com");
-            setPassword("public123");
-        }
-    }, [isVendor]);
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setError(null);
         if (!isLoaded) return;
 
         setLoading(true);
@@ -48,7 +33,7 @@ export default function SignInPage() {
                 await setActive({ session: attempt.createdSessionId });
                 setLoading(false);
 
-                if (isVendor) {
+                if (activeTab === "vendor") {
                     router.replace("/vendor/dashboard");
                 } else {
                     router.replace("/user/map");
@@ -73,75 +58,118 @@ export default function SignInPage() {
         }
     };
 
+    useEffect(() => {
+        if (activeTab === "vendor") {
+            setPassword("vendor123");
+        } else {
+            setPassword("public123");
+        }
+    }, [activeTab]);
+
     return (
-        <main className={styles.container}>
-            <section className={styles.card}>
-                <h1 className={styles.title}>Sign In</h1>
-                <p className={styles.subtitle}>
-                    {isVendor
-                        ? "Business Login"
-                        : "Welcome back! Sign in to continue."}
-                </p>
+        <main className="page-fullscreen">
+            <section className={styles.container}>
+                <div className={styles.card}>
+                    <h1 className={styles.title}>Welcome Back</h1>
+                    <p className={styles.subtitle}>
+                        Sign in to continue to MunchMap
+                    </p>
 
-                <form onSubmit={handleSubmit} className={styles.form}>
-                    <label className={styles.label}>
-                        Email
-                        <input
-                            type="email"
-                            className={styles.input}
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </label>
+                    <div className={styles.tabs}>
+                        <button
+                            className={`${styles.tab} ${activeTab === "user" ? styles.activeTab : ""}`}
+                            onClick={() => setActiveTab("user")}
+                        >
+                            Food Explorer
+                        </button>
+                        <button
+                            className={`${styles.tab} ${activeTab === "vendor" ? styles.activeTab : ""}`}
+                            onClick={() => setActiveTab("vendor")}
+                        >
+                            Food Vendor
+                        </button>
+                    </div>
 
-                    <label className={styles.label}>
-                        Password
-                        <input
-                            type="password"
-                            className={styles.input}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </label>
+                    <form onSubmit={handleSubmit} className={styles.form}>
+                        <div className={styles.inputGroup}>
+                            <label className={styles.label} htmlFor="email">
+                                Email
+                            </label>
+                            <input
+                                id="email"
+                                type="email"
+                                className={styles.input}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Enter your email"
+                                required
+                            />
+                        </div>
 
-                    {error && <p className={styles.error}>{error}</p>}
+                        <div className={styles.inputGroup}>
+                            <div className={styles.passwordHeader}>
+                                <label
+                                    className={styles.label}
+                                    htmlFor="password"
+                                >
+                                    Password
+                                </label>
+                                <Link
+                                    href="/auth/forgot-password"
+                                    className={styles.forgotPassword}
+                                >
+                                    Forgot Password?
+                                </Link>
+                            </div>
+                            <input
+                                id="password"
+                                type="password"
+                                className={styles.input}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Enter your password"
+                                required
+                            />
+                        </div>
 
-                    <button
-                        type="submit"
-                        className={styles.button}
-                        disabled={loading}
-                    >
-                        {loading ? "Signing In..." : "Sign In"}
+                        <button
+                            type="submit"
+                            className={styles.button}
+                            disabled={loading}
+                        >
+                            {loading ? "Signing In..." : "Sign In"}
+                        </button>
+                    </form>
+
+                    <div className={styles.divider}>
+                        <span>OR</span>
+                    </div>
+
+                    {/* <div className={styles.socialSignIn}>
+                    <button className={styles.socialButton}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        Continue with Facebook
                     </button>
-                </form>
+                    <button className={styles.socialButton}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+                        Continue with Google
+                    </button>
+                </div> */}
 
-                <p className={styles.linkText}>
-                    {isVendor ? "New Business?" : "New User?"}{" "}
-                    <Link
-                        href={
-                            isVendor
-                                ? "/auth/createBusiness/step1"
-                                : "/auth/createUser/step1"
-                        }
-                        className={styles.link}
-                    >
-                        {isVendor
-                            ? "Create New Business"
-                            : "Create Account Here"}
-                    </Link>
-                </p>
-
-                <button
-                    type="button"
-                    onClick={() => setIsVendor((prev) => !prev)}
-                    className={styles.switchRole}
-                >
-                    {isVendor
-                        ? "Switch to Public Login"
-                        : "Switch to Vendor Login"}
-                </button>
+                    <p className={styles.linkText}>
+                        {`Don't have an account? `}
+                        <Link
+                            href={
+                                activeTab === "vendor"
+                                    ? "/auth/sign-up/vendor"
+                                    : "/auth/sign-up/user"
+                            }
+                            className={styles.link}
+                        >
+                            Sign Up Now
+                        </Link>
+                    </p>
+                </div>
             </section>
         </main>
     );

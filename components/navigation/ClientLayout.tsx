@@ -8,7 +8,7 @@ import { api } from "@/convex/_generated/api";
 
 // Define route access patterns more explicitly
 const PUBLIC_ROUTES = ["/", "/map", "/vendor-info"];
-const AUTH_ROUTES = ["/auth", "/auth/sign-in", "/auth/sign-up"];
+const AUTH_ROUTES = ["/auth", "/auth/sign-in", "/auth/sign-up/user", "/auth/sign-up/vendor"];
 const USER_ROUTES = ["/user"];
 const VENDOR_ROUTES = ["/vendor"];
 const ONBOARDING_ROUTE = "/auth/createBusiness/step6";

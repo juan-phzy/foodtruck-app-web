@@ -1,0 +1,347 @@
+.container {
+    display: flex;
+    flex:1;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-md);
+    background-color: var(--color-primary-extra-light);
+    background-image: linear-gradient(
+        135deg,
+        var(--color-primary-extra-light) 0%,
+        var(--color-white) 100%
+    );
+    border: 2px solid red;
+}
+
+.card {
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.title {
+    font-size: var(--font-size-xxl);
+    font-weight: bold;
+    margin-bottom: var(--space-xs);
+    text-align: center;
+    color: var(--color-black);
+}
+
+.subtitle {
+    font-size: var(--font-size-md);
+    color: var(--color-gray-dark);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Step indicators */
+.stepIndicator {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-lg);
+    gap: var(--space-md);
+}
+
+.stepTitle {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    color: var(--color-black);
+}
+
+.activeStep,
+.inactiveStep,
+.completedStep {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+.activeStep {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: 0 2px 8px rgba(255, 132, 0, 0.2);
+}
+
+.inactiveStep {
+    background-color: var(--color-gray-light);
+    color: var(--color-gray-dark);
+}
+
+.completedStep {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.completedStep::after {
+    content: "✓";
+}
+
+/* Form elements */
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.input {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-gray);
+    font-size: var(--font-size-md);
+    transition:
+        border 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(255, 132, 0, 0.1);
+}
+
+.input::placeholder {
+    color: var(--color-gray-dark-inactive);
+}
+
+.helperText {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-dark);
+    margin-top: var(--space-xxs);
+}
+
+/* Buttons */
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.backButton,
+.nextButton {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: var(--font-size-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.backButton {
+    background-color: var(--color-white);
+    color: var(--color-gray-dark);
+    border: 1px solid var(--color-gray);
+    flex: 1;
+}
+
+.backButton:hover {
+    background-color: var(--color-gray-light);
+}
+
+.nextButton {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    flex: 2;
+    box-shadow: 0 4px 10px rgba(255, 132, 0, 0.2);
+}
+
+.nextButton:hover {
+    background-color: #e87800;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(255, 132, 0, 0.25);
+}
+
+.nextButton:disabled,
+.backButton:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Review step */
+.reviewContainer {
+    background-color: var(--color-gray-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.reviewSection {
+    margin-bottom: var(--space-md);
+}
+
+.reviewSectionTitle {
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+    color: var(--color-black);
+}
+
+.reviewItem {
+    display: flex;
+    margin-bottom: var(--space-xs);
+}
+
+.reviewLabel {
+    font-weight: 600;
+    color: var(--color-gray-dark);
+    width: 100px;
+    flex-shrink: 0;
+}
+
+.reviewValue {
+    color: var(--color-black);
+    flex-grow: 1;
+}
+
+.termsSection {
+    margin-bottom: var(--space-lg);
+}
+
+.termsText {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-dark);
+    text-align: center;
+}
+
+.termsLink {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.termsLink:hover {
+    text-decoration: underline;
+}
+
+/* Verification step */
+.verificationText {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    color: var(--color-gray-dark);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+}
+
+.resendText {
+    text-align: center;
+    margin-top: var(--space-lg);
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-dark);
+}
+
+.resendButton {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+}
+
+.resendButton:hover {
+    text-decoration: underline;
+}
+
+/* Bottom links */
+.switchSection {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-gray);
+}
+
+.switchText {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-dark);
+    text-align: center;
+}
+
+.switchLink {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.switchLink:hover {
+    text-decoration: underline;
+}
+
+.linkText {
+    margin-top: var(--space-lg);
+    font-size: var(--font-size-sm);
+    text-align: center;
+    color: var(--color-gray-dark);
+}
+
+.link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .card {
+        padding: var(--space-xxl);
+    }
+
+    .title {
+        font-size: var(--font-size-xxxl);
+    }
+
+    .subtitle {
+        font-size: var(--font-size-lg);
+    }
+
+    .stepTitle {
+        font-size: var(--font-size-xl);
+    }
+
+    .activeStep,
+    .inactiveStep,
+    .completedStep {
+        width: 40px;
+        height: 40px;
+        font-size: var(--font-size-md);
+    }
+}

@@ -14,9 +14,16 @@ FOODTRUCK-APP-WEB
 │   |       ├── page.module.css
 │   |       └── page.tsx
 |   ├── auth
-│   │   └── sign-in
-│   |       ├── page.module.css
-│   |       └── page.tsx
+│   │   ├── sign-in
+│   |   |   ├── page.module.css
+│   |   |   └── page.tsx
+│   │   └── sign-up
+│   |       ├── user
+|   │       │   ├── page.module.css
+|   │       │   └── page.tsx
+│   |       └── vendor
+|   │           ├── page.module.css
+|   │           └── page.tsx
 |   ├── user
 │   │   ├── account
 │   |   │   ├── page.module.css

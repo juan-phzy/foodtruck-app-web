@@ -1,48 +1,323 @@
-.mapPage {
-	position: relative;
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-  }
-  
-  .mapContainer {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
-  }
-  
-  .promptBox {
-	position: absolute;
-	bottom: 40px;
-	left: 50%;
-	transform: translateX(-50%);
-	background: white;
-	border: 1px solid var(--color-gray);
-	padding: var(--space-md);
-	border-radius: var(--radius-md);
-	font-size: var(--font-size-sm);
-	z-index: 10;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  }
-  
-  .truckMarker {
-	width: 60px;
-	height: 60px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-  }
-  
-  .truckIcon {
-	width: 80px;
-	height: 80px;
-	object-fit: contain;
-	pointer-events: none;
-  }
-  
+.mapPageWrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.mapContainer {
+    display: flex;
+    flex: 1;
+    position: relative;
+    min-height: 0; /* This is important for flex children to prevent overflow */
+}
+
+.loadingOverlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-white);
+    z-index: 5;
+}
+
+/* Sign-up Prompt */
+.signUpPrompt {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    background-color: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    z-index: 100;
+    border-left: 4px solid var(--color-primary);
+    animation: fadeInDown 0.5s ease-out;
+    text-align: center;
+}
+
+.signUpPrompt p {
+    font-size: var(--font-size-md);
+    margin: 0 0 16px 0;
+    color: var(--color-black);
+    font-weight: 500;
+}
+
+.signUpPromptButtons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.signUpButton,
+.signInButton {
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    transition: all 0.2s ease;
+}
+
+.signUpButton {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.signUpButton:hover {
+    background-color: #e87800;
+}
+
+.signInButton {
+    background-color: var(--color-gray-light);
+    color: var(--color-black);
+    border: 1px solid var(--color-gray);
+}
+
+.signInButton:hover {
+    background-color: var(--color-gray);
+}
+
+.closePromptButton {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    color: var(--color-gray-dark);
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+    opacity: 0.7;
+}
+
+.closePromptButton:hover {
+    opacity: 1;
+}
+
+/* Truck popup styling */
+.truckPopup {
+    max-width: 200px;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+}
+
+/* Enhanced Truck info panel */
+.enhancedTruckInfoPanel {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 450px;
+    width: calc(100% - 32px);
+    background-color: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    z-index: 100;
+    border-left: 4px solid var(--color-primary);
+    animation: slideUp 0.3s ease-out;
+    /* Respect safe area inset - this ensures the panel is above the Safari toolbar */
+    bottom: calc(16px + var(--safe-area-inset-bottom));
+}
+
+.truckInfoHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-right: 30px; /* Make room for close button */
+}
+
+.truckInfoHeader h3 {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    color: var(--color-black);
+    font-weight: 600;
+}
+
+.statusIndicator {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+.statusIndicator.open {
+    background-color: rgba(0, 128, 0, 0.1);
+    color: var(--color-green);
+}
+
+.statusIndicator.closed {
+    background-color: rgba(120, 120, 120, 0.1);
+    color: var(--color-gray-dark);
+}
+
+.truckCategories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+.categoryTag {
+    font-size: var(--font-size-xs);
+    background-color: var(--color-gray-light);
+    padding: 4px 10px;
+    border-radius: 12px;
+    color: var(--color-gray-dark);
+}
+
+.truckLocation {
+    margin: 12px 0;
+    font-size: var(--font-size-md);
+    color: var(--color-gray-dark);
+}
+
+.truckInfoCta {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-gray);
+}
+
+.truckInfoCta p {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-dark);
+    margin: 0 0 12px 0;
+    text-align: center;
+}
+
+.truckInfoButtons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.truckInfoSignUp,
+.truckInfoSignIn {
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    transition: all 0.2s ease;
+}
+
+.truckInfoSignUp {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.truckInfoSignUp:hover {
+    background-color: #e87800;
+    transform: translateY(-1px);
+}
+
+.truckInfoSignIn {
+    background-color: var(--color-gray-light);
+    color: var(--color-black);
+    border: 1px solid var(--color-gray);
+}
+
+.truckInfoSignIn:hover {
+    background-color: var(--color-white);
+    transform: translateY(-1px);
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: var(--color-gray-dark);
+    cursor: pointer;
+    height: 28px;
+    width: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    z-index: 2;
+}
+
+.closeButton:hover {
+    opacity: 1;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translate(-50%, 20px);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        transform: translate(-50%, -20px);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+/* Fix for iOS Safari issues */
+@supports (-webkit-touch-callout: none) {
+    /* iOS specific - helps with the bottom bar issue */
+    .mapPageWrapper {
+        height: -webkit-fill-available;
+    }
+
+    .enhancedTruckInfoPanel {
+        /* Make sure the panel is visible on iOS */
+        transform: translate(-50%, 0) translateZ(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .signUpPrompt {
+        max-width: 450px;
+    }
+
+    .signUpPrompt p {
+        font-size: var(--font-size-lg);
+    }
+
+    .signUpButton,
+    .signInButton,
+    .truckInfoSignUp,
+    .truckInfoSignIn {
+        padding: 8px 20px;
+        font-size: var(--font-size-md);
+    }
+
+    .enhancedTruckInfoPanel {
+        padding: 24px;
+    }
+}

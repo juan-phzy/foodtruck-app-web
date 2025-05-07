@@ -79,7 +79,7 @@ export default function PublicNavBar() {
                                 Sign In
                             </Link>
                             <Link
-                                href="/auth/sign-up"
+                                href="/auth/sign-up/user"
                                 className={styles.signupBtn}
                             >
                                 Sign Up

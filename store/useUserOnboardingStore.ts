@@ -13,14 +13,26 @@ type UserOnboardingData = {
 };
 
 type UserOnboardingStore = {
-    data: Partial<UserOnboardingData>;
+    data: UserOnboardingData;
     updateField: (field: keyof UserOnboardingData, value: string | string[]) => void;
     reset: () => void;
 };
 
+// Initialize all required fields with empty strings
+const initialData: UserOnboardingData = {
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+    password: "",
+    dob: "",
+    primary_city: "",
+    selectedCategories: [],
+};
+
 export const useUserOnboardingStore = create<UserOnboardingStore>(
     (set) => ({
-        data: {},
+        data: initialData,
         updateField: (field, value) =>
             set((state) => ({
                 data: {
@@ -28,6 +40,6 @@ export const useUserOnboardingStore = create<UserOnboardingStore>(
                     [field]: value,
                 },
             })),
-        reset: () => set({ data: {} }),
+        reset: () => set({ data: initialData }),
     })
 );
