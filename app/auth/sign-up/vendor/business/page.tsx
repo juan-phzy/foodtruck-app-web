@@ -1,7 +1,7 @@
 // app/auth/sign-up/vendor/business/page.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useUser, useClerk } from "@clerk/nextjs";
@@ -16,7 +16,7 @@ import {
 import { CATEGORIES } from "@/constants";
 import Image from "next/image";
 
-export default function BusinessPage() {
+function BusinessPageContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const { user, isLoaded } = useUser();
@@ -902,3 +902,22 @@ export default function BusinessPage() {
         </main>
     );
 }
+
+export default function BusinessPage() {
+    return (
+      <Suspense fallback={
+        <main className="page-fullscreen">
+          <section className={styles.container}>
+            <div className={styles.card}>
+              <h1 className={styles.title}>Loading...</h1>
+              <div className={styles.loaderContainer}>
+                <div className={styles.loader}></div>
+              </div>
+            </div>
+          </section>
+        </main>
+      }>
+        <BusinessPageContent />
+      </Suspense>
+    );
+  }
