@@ -1,0 +1,723 @@
+/* /app/auth/sign-up/vendor/page.module.css */
+
+/* Base styles for all pages */
+.container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-md);
+    background-color: var(--color-primary-extra-light);
+    background-image: linear-gradient(
+        135deg,
+        var(--color-primary-extra-light) 0%,
+        var(--color-white) 100%
+    );
+}
+
+.card {
+    width: 100%;
+    max-width: 90%;
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.title {
+    font-size: var(--font-size-xxl);
+    font-weight: bold;
+    margin-bottom: var(--space-xs);
+    text-align: center;
+    color: var(--color-black);
+}
+
+.subtitle {
+    font-size: var(--font-size-md);
+    color: var(--color-gray-dark);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Step indicators */
+.stepIndicator {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-lg);
+    gap: var(--space-md);
+}
+
+.stepTitle {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    color: var(--color-black);
+}
+
+.activeStep,
+.inactiveStep,
+.completedStep {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+.activeStep {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: 0 2px 8px rgba(255, 132, 0, 0.2);
+}
+
+.inactiveStep {
+    background-color: var(--color-gray-light);
+    color: var(--color-gray-dark);
+}
+
+.completedStep {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.completedStep::after {
+    content: "✓";
+}
+
+/* Form elements */
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.input {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-gray);
+    font-size: var(--font-size-md);
+    transition:
+        border 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(255, 132, 0, 0.1);
+}
+
+.input::placeholder {
+    color: var(--color-gray-dark-inactive);
+}
+
+.helperText {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-dark);
+    margin-top: var(--space-xxs);
+}
+
+.errorText {
+    font-size: var(--font-size-xs);
+    color: #e53935;
+    margin-top: var(--space-xxs);
+}
+
+/* Buttons */
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.backButton,
+.nextButton {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: var(--font-size-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.backButton {
+    background-color: var(--color-white);
+    color: var(--color-gray-dark);
+    border: 1px solid var(--color-gray);
+    flex: 1;
+}
+
+.backButton:hover {
+    background-color: var(--color-gray-light);
+}
+
+.nextButton {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    flex: 2;
+    box-shadow: 0 4px 10px rgba(255, 132, 0, 0.2);
+}
+
+.nextButton:hover {
+    background-color: #e87800;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(255, 132, 0, 0.25);
+}
+
+.nextButton:disabled,
+.backButton:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Review step */
+.reviewContainer {
+    background-color: var(--color-gray-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.reviewSection {
+    margin-bottom: var(--space-md);
+}
+
+.reviewSectionTitle {
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+    color: var(--color-black);
+}
+
+.reviewItem {
+    display: flex;
+    margin-bottom: var(--space-xs);
+}
+
+.reviewLabel {
+    font-weight: 600;
+    color: var(--color-gray-dark);
+    width: 100px;
+    flex-shrink: 0;
+}
+
+.reviewValue {
+    color: var(--color-black);
+    flex-grow: 1;
+}
+
+.termsSection {
+    margin-bottom: var(--space-lg);
+}
+
+.termsText {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-dark);
+    text-align: center;
+}
+
+.termsLink {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.termsLink:hover {
+    text-decoration: underline;
+}
+
+/* Verification step */
+.verificationText {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    color: var(--color-gray-dark);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+}
+
+.resendText {
+    text-align: center;
+    margin-top: var(--space-lg);
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-dark);
+}
+
+.resendButton {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+}
+
+.resendButton:hover {
+    text-decoration: underline;
+}
+
+/* Bottom links */
+.switchSection {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-gray);
+}
+
+.switchText {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-dark);
+    text-align: center;
+}
+
+.switchLink {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.switchLink:hover {
+    text-decoration: underline;
+}
+
+.linkText {
+    margin-top: var(--space-lg);
+    font-size: var(--font-size-sm);
+    text-align: center;
+    color: var(--color-gray-dark);
+}
+
+.link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+/* Loader */
+.loaderContainer {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.loader {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid var(--color-primary);
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+.inputError {
+    border-color: #e53935;
+    background-color: rgba(229, 57, 53, 0.05);
+}
+
+/* Subscription page specific styles */
+.plansContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.planCard {
+    background-color: var(--color-white);
+    border: 2px solid var(--color-gray);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    position: relative;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0; /* Prevents flexbox items from overflowing */
+}
+
+.planCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.selectedPlan {
+    border-color: var(--color-primary);
+    background-color: rgba(255, 132, 0, 0.05);
+    box-shadow: 0 8px 16px rgba(255, 132, 0, 0.1);
+}
+
+.recommendedPlan {
+    border-color: var(--color-primary);
+}
+
+.recommendedBadge {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background-color: var(--color-primary);
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+}
+
+.planName {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: 0.5rem;
+}
+
+.planPrice {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 0.75rem;
+}
+
+.currency {
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.amount {
+    font-size: var(--font-size-xxl);
+    font-weight: bold;
+    color: var(--color-black);
+    margin: 0 0.25rem;
+}
+
+.period {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-dark);
+}
+
+.planLimits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.limitBadge {
+    background-color: rgba(255, 132, 0, 0.1);
+    color: var(--color-primary);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-md);
+}
+
+.trialBadge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: var(--font-size-xs);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+}
+
+.planDescription {
+    margin: 0.75rem 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-dark);
+    text-align: center;
+}
+
+.featuresList {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    flex-grow: 1;
+}
+
+.featureItem {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-dark);
+}
+
+.checkmark {
+    color: var(--color-primary);
+    font-weight: bold;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+}
+
+.selectButton {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-gray);
+    border-radius: var(--radius-md);
+    background-color: var(--color-white);
+    color: var(--color-gray-dark);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: auto;
+}
+
+.selectButton:hover {
+    background-color: var(--color-gray-light);
+}
+
+.selectedButton {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+
+.selectedButton:hover {
+    background-color: #e87800;
+}
+
+.secureNotice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-dark);
+    margin-top: 1.5rem;
+}
+
+/* Add these styles to your page.module.css file */
+
+/* Category selection styles */
+.categoriesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.categoryCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: calc(25% - 0.75rem);
+    min-width: 85px;
+    padding: 0.75rem 0.5rem;
+    border: 1px solid var(--color-gray);
+    border-radius: var(--radius-md);
+    background-color: var(--color-white);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.categoryCard:hover {
+    border-color: var(--color-primary-light);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+.selectedCategory {
+    border-color: var(--color-primary);
+    background-color: rgba(255, 132, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(255, 132, 0, 0.1);
+}
+
+.categoryImageContainer {
+    margin-bottom: 0.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.categoryName {
+    font-size: var(--font-size-sm);
+    text-align: center;
+    color: var(--color-black);
+    font-weight: 500;
+}
+
+.selectedCheckmark {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.selectionSummary {
+    margin-bottom: 1.5rem;
+    background-color: var(--color-gray-light);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+}
+
+.selectionCount {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--color-gray-dark);
+}
+
+.selectedList {
+    font-size: var(--font-size-sm);
+    color: var(--color-black);
+}
+
+.selectedTag {
+    display: inline-block;
+    font-weight: 500;
+}
+
+.errorMessage {
+    background-color: rgba(229, 57, 53, 0.05);
+    border: 1px solid #e53935;
+    color: #e53935;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+    font-size: var(--font-size-sm);
+    text-align: center;
+}
+
+/* Responsive styles for category selection */
+@media (max-width: 767px) {
+    .categoryCard {
+        width: calc(33.33% - 0.75rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .categoryCard {
+        width: calc(50% - 0.75rem);
+    }
+}
+
+/* Animation keyframes */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive media queries */
+@media (min-width: 768px) {
+    .card {
+        padding: var(--space-xxl);
+        max-width: 95%;
+    }
+
+    .title {
+        font-size: var(--font-size-xxxl);
+    }
+
+    .subtitle {
+        font-size: var(--font-size-lg);
+    }
+
+    .stepTitle {
+        font-size: var(--font-size-xl);
+    }
+
+    .activeStep,
+    .inactiveStep,
+    .completedStep {
+        width: 40px;
+        height: 40px;
+        font-size: var(--font-size-md);
+    }
+
+    .plansContainer {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .planCard {
+        flex-basis: calc(50% - 1.5rem);
+        max-width: calc(50% - 1.5rem);
+    }
+}
+
+@media (min-width: 1024px) {
+    .card {
+        max-width: 1200px;
+    }
+
+    .plansContainer {
+        justify-content: space-between;
+    }
+
+    .planCard {
+        flex-basis: calc(25% - 1.5rem);
+        max-width: calc(25% - 1.5rem);
+    }
+
+    /* Adjust font sizes for better readability on wider screens */
+    .featureItem {
+        font-size: var(--font-size-xs);
+    }
+}
+
+@media (min-width: 1280px) {
+    .featureItem {
+        font-size: var(--font-size-sm);
+    }
+}
+
+@media (min-width: 1536px) {
+    .card {
+        max-width: 1400px;
+    }
+}

@@ -358,109 +358,109 @@
 //     },
 // ];
 
-// type Category = {
-//     name: string;
-//     url: string;
-// };
+type Category = {
+    name: string;
+    url: string;
+};
 
-// export const CATEGORIES: Category[] = [
-//     {
-//         name: "American",
-//         url: "https://cdn-icons-png.flaticon.com/128/206/206626.png",
-//     },
-//     {
-//         name: "Burgers",
-//         url: "https://cdn-icons-png.flaticon.com/128/878/878052.png",
-//     },
-//     {
-//         name: "Mexican",
-//         url: "https://cdn-icons-png.flaticon.com/128/12360/12360219.png",
-//     },
-//     {
-//         name: "Tacos",
-//         url: "https://cdn-icons-png.flaticon.com/128/537/537386.png",
-//     },
-//     {
-//         name: "BBQ",
-//         url: "https://cdn-icons-png.flaticon.com/128/3808/3808804.png",
-//     },
-//     {
-//         name: "Ribs",
-//         url: "https://cdn-icons-png.flaticon.com/128/6332/6332512.png",
-//     },
-//     {
-//         name: "Italian",
-//         url: "https://cdn-icons-png.flaticon.com/128/330/330672.png",
-//     },
-//     {
-//         name: "Pizza",
-//         url: "https://cdn-icons-png.flaticon.com/128/3595/3595455.png",
-//     },
-//     {
-//         name: "Vegan",
-//         url: "https://cdn-icons-png.flaticon.com/128/16206/16206765.png",
-//     },
-//     {
-//         name: "Healthy",
-//         url: "https://cdn-icons-png.flaticon.com/128/706/706164.png",
-//     },
-//     {
-//         name: "Japanese",
-//         url: "https://cdn-icons-png.flaticon.com/128/14007/14007506.png",
-//     },
-//     {
-//         name: "Sushi",
-//         url: "https://cdn-icons-png.flaticon.com/128/2674/2674064.png",
-//     },
-//     {
-//         name: "Seafood",
-//         url: "https://cdn-icons-png.flaticon.com/128/3082/3082055.png",
-//     },
-//     {
-//         name: "French",
-//         url: "https://cdn-icons-png.flaticon.com/128/330/330490.png",
-//     },
-//     {
-//         name: "Desserts",
-//         url: "https://cdn-icons-png.flaticon.com/128/3081/3081903.png",
-//     },
-//     {
-//         name: "Crepes",
-//         url: "https://cdn-icons-png.flaticon.com/128/168/168351.png",
-//     },
-//     {
-//         name: "Mediterranean",
-//         url: "https://cdn-icons-png.flaticon.com/128/5861/5861566.png",
-//     },
-//     {
-//         name: "Kebabs",
-//         url: "https://cdn-icons-png.flaticon.com/128/4711/4711382.png",
-//     },
-//     {
-//         name: "Middle Eastern",
-//         url: "https://cdn-icons-png.flaticon.com/128/706/706893.png",
-//     },
-//     {
-//         name: "Chinese",
-//         url: "https://cdn-icons-png.flaticon.com/128/13482/13482170.png",
-//     },
-//     {
-//         name: "Dim Sum",
-//         url: "https://cdn-icons-png.flaticon.com/128/7499/7499405.png",
-//     },
-//     {
-//         name: "Dumplings",
-//         url: "https://cdn-icons-png.flaticon.com/128/673/673530.png",
-//     },
-//     {
-//         name: "Fast Food",
-//         url: "https://cdn-icons-png.flaticon.com/128/737/737967.png",
-//     },
-//     {
-//         name: "Pasta",
-//         url: "https://cdn-icons-png.flaticon.com/128/3480/3480618.png",
-//     },
-// ];
+export const CATEGORIES: Category[] = [
+    {
+        name: "American",
+        url: "https://cdn-icons-png.flaticon.com/128/206/206626.png",
+    },
+    {
+        name: "Burgers",
+        url: "https://cdn-icons-png.flaticon.com/128/878/878052.png",
+    },
+    {
+        name: "Mexican",
+        url: "https://cdn-icons-png.flaticon.com/128/12360/12360219.png",
+    },
+    {
+        name: "Tacos",
+        url: "https://cdn-icons-png.flaticon.com/128/537/537386.png",
+    },
+    {
+        name: "BBQ",
+        url: "https://cdn-icons-png.flaticon.com/128/3808/3808804.png",
+    },
+    {
+        name: "Ribs",
+        url: "https://cdn-icons-png.flaticon.com/128/6332/6332512.png",
+    },
+    {
+        name: "Italian",
+        url: "https://cdn-icons-png.flaticon.com/128/330/330672.png",
+    },
+    {
+        name: "Pizza",
+        url: "https://cdn-icons-png.flaticon.com/128/3595/3595455.png",
+    },
+    {
+        name: "Vegan",
+        url: "https://cdn-icons-png.flaticon.com/128/16206/16206765.png",
+    },
+    {
+        name: "Healthy",
+        url: "https://cdn-icons-png.flaticon.com/128/706/706164.png",
+    },
+    {
+        name: "Japanese",
+        url: "https://cdn-icons-png.flaticon.com/128/14007/14007506.png",
+    },
+    {
+        name: "Sushi",
+        url: "https://cdn-icons-png.flaticon.com/128/2674/2674064.png",
+    },
+    {
+        name: "Seafood",
+        url: "https://cdn-icons-png.flaticon.com/128/3082/3082055.png",
+    },
+    {
+        name: "French",
+        url: "https://cdn-icons-png.flaticon.com/128/330/330490.png",
+    },
+    {
+        name: "Desserts",
+        url: "https://cdn-icons-png.flaticon.com/128/3081/3081903.png",
+    },
+    {
+        name: "Crepes",
+        url: "https://cdn-icons-png.flaticon.com/128/168/168351.png",
+    },
+    {
+        name: "Mediterranean",
+        url: "https://cdn-icons-png.flaticon.com/128/5861/5861566.png",
+    },
+    {
+        name: "Kebabs",
+        url: "https://cdn-icons-png.flaticon.com/128/4711/4711382.png",
+    },
+    {
+        name: "Middle Eastern",
+        url: "https://cdn-icons-png.flaticon.com/128/706/706893.png",
+    },
+    {
+        name: "Chinese",
+        url: "https://cdn-icons-png.flaticon.com/128/13482/13482170.png",
+    },
+    {
+        name: "Dim Sum",
+        url: "https://cdn-icons-png.flaticon.com/128/7499/7499405.png",
+    },
+    {
+        name: "Dumplings",
+        url: "https://cdn-icons-png.flaticon.com/128/673/673530.png",
+    },
+    {
+        name: "Fast Food",
+        url: "https://cdn-icons-png.flaticon.com/128/737/737967.png",
+    },
+    {
+        name: "Pasta",
+        url: "https://cdn-icons-png.flaticon.com/128/3480/3480618.png",
+    },
+];
 
 // export const FOOD_TRUCKS: FoodTruck[] = [
 //     {

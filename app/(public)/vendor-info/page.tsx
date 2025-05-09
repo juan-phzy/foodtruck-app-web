@@ -26,7 +26,7 @@ export default function VendorInfoPage() {
                     <div className={styles.heroCta}>
                         {!isSignedIn ? (
                             <Link
-                                href="/auth/sign-up"
+                                href="/auth/sign-up/vendor"
                                 className={styles.primaryBtn}
                             >
                                 Join as a Vendor
@@ -193,7 +193,7 @@ export default function VendorInfoPage() {
                             </ul>
                             <div className={styles.pricingCta}>
                                 <Link
-                                    href="/auth/sign-up"
+                                    href="/auth/sign-up/vendor"
                                     className={styles.secondaryBtn}
                                 >
                                     Start Free
@@ -222,7 +222,7 @@ export default function VendorInfoPage() {
                             </ul>
                             <div className={styles.pricingCta}>
                                 <Link
-                                    href="/auth/sign-up"
+                                    href="/auth/sign-up/vendor"
                                     className={styles.primaryBtn}
                                 >
                                     Get Started
@@ -325,7 +325,7 @@ export default function VendorInfoPage() {
 
                         {!isSignedIn ? (
                             <Link
-                                href="/auth/sign-up"
+                                href="/auth/sign-up/vendor"
                                 className={styles.ctaBtn}
                             >
                                 Join MunchMap Today

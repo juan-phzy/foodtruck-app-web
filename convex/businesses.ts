@@ -69,6 +69,7 @@ export const updatePublicInfo = mutation({
         description: v.optional(v.string()),
         phone_number: v.optional(v.string()),
         email_link: v.optional(v.string()),
+        primary_city: v.optional(v.string()),
     },
     handler: async (ctx, args) => {
         const business = await ctx.db
@@ -84,6 +85,7 @@ export const updatePublicInfo = mutation({
             description: args.description,
             phone_number: args.phone_number,
             email_link: args.email_link,
+            primary_city: args.primary_city,
         });
     },
 });

@@ -22,12 +22,18 @@ export default defineSchema({
         phone_number: v.string(),
         email: v.string(),
         dob: v.optional(v.string()),
+        stripeCustomerId: v.optional(v.string()),
+        stripeSubscriptionId: v.optional(v.string()),
+        subscriptionPlanId: v.optional(v.string()), // e.g. "starter", "growth", etc.
+        subscriptionStatus: v.optional(v.string()), // e.g. "active", "past_due", "canceled"
+        subscriptionCurrentPeriodEnd: v.optional(v.string()), // ISO date string
         business_Id: v.optional(v.string()),
         is_onboarded: v.boolean(),
     })
         .index("by_clerk_id", ["clerkId"])
         .index("by_email", ["email"])
-        .index("by_phone", ["phone_number"]),
+        .index("by_phone", ["phone_number"])
+        .index("by_stripe_customer_id", ["stripeCustomerId"]),
 
     businesses: defineTable({
         // Identifiers

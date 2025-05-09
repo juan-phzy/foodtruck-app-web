@@ -122,6 +122,11 @@ export type VendorProfile = {
     email: string;
     clerkId: string;
     is_onboarded: boolean;
+    stripeCustomerId: string;
+    stripeSubscriptionId: string;
+    subscriptionPlanId: string; // e.g. "starter", "growth", etc.
+    subscriptionStatus: string; // e.g. "active", "past_due", "canceled"
+    subscriptionCurrentPeriodEnd: string; // ISO date string
 };
 
 export type Business = {
@@ -172,33 +177,32 @@ export type Menu = {
     name: string;
     business_convex_id: Id<"businesses">;
     menu: {
-      category: string;
-      items: {
-        name: string;
-        description: string;
-        price: number;
-        imageUrl: string;
-      }[];
+        category: string;
+        items: {
+            name: string;
+            description: string;
+            price: number;
+            imageUrl: string;
+        }[];
     }[];
-  };
-
+};
 
 export type DayOfWeek =
-  | "Sunday"
-  | "Monday"
-  | "Tuesday"
-  | "Wednesday"
-  | "Thursday"
-  | "Friday"
-  | "Saturday";
+    | "Sunday"
+    | "Monday"
+    | "Tuesday"
+    | "Wednesday"
+    | "Thursday"
+    | "Friday"
+    | "Saturday";
 
 export type ScheduleType = Record<
-  DayOfWeek,
-  {
-    start: string;
-    end: string;
-    closed: boolean;
-  }
+    DayOfWeek,
+    {
+        start: string;
+        end: string;
+        closed: boolean;
+    }
 >;
 
 export const COLORS = {
@@ -207,27 +211,27 @@ export const COLORS = {
     colorPrimaryInactive: "#ff840080", // rgba(255, 132, 0, 0.5)
     colorPrimaryLight: "#fff3e6", // rgba(255, 243, 230, 1)
     colorPrimaryExtraLight: "#fffbf6", // rgb(255, 251, 246)
-  
+
     // Black colors
     colorBlack: "#000000", // rgba(0, 0, 0, 1)
     colorBlackInactive: "#00000080", // rgba(0, 0, 0, 0.5)
-  
+
     // Gray colors
     colorGrayDark: "#787878", // rgba(120, 120, 120, 1)
     colorGrayDarkInactive: "#78787880", // rgba(120, 120, 120, 0.5)
     colorGray: "#dddddd", // rgba(221, 221, 221, 1)
     colorGrayInactive: "#dddddd80", // rgba(221, 221, 221, 0.5)
     colorGrayLight: "#f9f9f9", // rgba(249, 249, 249, 1)
-  
+
     // White colors
     colorWhite: "#ffffff", // rgba(255, 255, 255, 1)
     colorWhiteInactive: "#ffffff80", // rgba(255, 255, 255, 0.5)
-  
+
     // Green colors
     colorGreen: "#008000", // rgba(0, 128, 0, 1)
     colorGreenLight: "#00c700", // rgb(0, 199, 0)
-  
+
     // Other colors
     colorRed: "#ff0000", // rgba(255, 0, 0, 1)
     colorBrown: "#8b4513", // rgba(139, 69, 19, 1)
-  };
+};

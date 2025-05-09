@@ -1,119 +1,164 @@
-// users.ts
-import { mutation, MutationCtx, query, QueryCtx } from "./_generated/server";
+// convex/vendors.ts
+import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
+// Create a new vendor
 export const createVendor = mutation({
     args: {
+        clerkId: v.string(),
         first_name: v.string(),
         last_name: v.string(),
-        phone_number: v.string(), // Optional
+        phone_number: v.string(),
         email: v.string(),
         dob: v.optional(v.string()),
-        clerkId: v.string(), // Connects Clerk and Convex
+        is_onboarded: v.boolean(),
     },
-
     handler: async (ctx, args) => {
-        const existingUser = await ctx.db
+        // Check if a vendor with this Clerk ID already exists
+        const existingVendor = await ctx.db
             .query("vendors")
             .withIndex("by_clerk_id", (q) => q.eq("clerkId", args.clerkId))
             .first();
 
-        if (existingUser) return;
+        if (existingVendor) {
+            throw new Error("A vendor with this ID already exists.");
+        }
 
-        await ctx.db.insert("vendors", {
-            first_name: args.first_name,
-            last_name: args.last_name,
-            phone_number: args.phone_number,
-            email: args.email,
-            dob: args.dob,
-            clerkId: args.clerkId,
-            is_onboarded: false,
+        // Create the new vendor
+        return await ctx.db.insert("vendors", {
+            ...args,
         });
     },
 });
 
-export const getUserByClerkId = query({
+// Get a vendor by Clerk ID
+export const getVendorByClerkId = query({
     args: { clerkId: v.string() },
     handler: async (ctx, args) => {
-        const user = await ctx.db
+        return await ctx.db
             .query("vendors")
             .withIndex("by_clerk_id", (q) => q.eq("clerkId", args.clerkId))
-            .unique();
-        return user;
+            .first();
     },
 });
 
-export async function getAuthenticatedVendor(ctx: QueryCtx | MutationCtx) {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) throw new Error("Unauthorized");
-
-    const currentVendor = await ctx.db
-        .query("vendors")
-        .withIndex("by_clerk_id", (q) => q.eq("clerkId", identity.subject))
-        .first();
-
-    if (!currentVendor) throw new Error("Vendor not found");
-
-    return currentVendor;
-}
-
+// Update vendor profile
 export const updateClerkInfo = mutation({
     args: {
         clerkId: v.string(),
-        first_name: v.string(),
-        last_name: v.string(),
-        phone_number: v.string(), 
-        email: v.string(),
+        first_name: v.optional(v.string()),
+        last_name: v.optional(v.string()),
+        phone_number: v.optional(v.string()),
+        email: v.optional(v.string()),
+        dob: v.optional(v.string()),
+        is_onboarded: v.optional(v.boolean()),
+    },
+    handler: async (ctx, args) => {
+        const { clerkId, ...updates } = args;
+
+        // Find the vendor
+        const vendor = await ctx.db
+            .query("vendors")
+            .withIndex("by_clerk_id", (q) => q.eq("clerkId", clerkId))
+            .first();
+
+        if (!vendor) {
+            throw new Error("Vendor not found.");
+        }
+
+        // Update only the fields that are provided
+        await ctx.db.patch(vendor._id, updates);
+    },
+});
+
+// Link a business to a vendor
+export const linkBusinessToVendor = mutation({
+    args: {
+        vendorClerkId: v.string(),
+        businessId: v.string(),
     },
     handler: async (ctx, args) => {
         const vendor = await ctx.db
             .query("vendors")
-            .withIndex("by_clerk_id", (q) => q.eq("clerkId", args.clerkId))
-            .unique();
+            .withIndex("by_clerk_id", (q) =>
+                q.eq("clerkId", args.vendorClerkId)
+            )
+            .first();
 
         if (!vendor) {
-            throw new Error("Vendor not found");
+            throw new Error("Vendor not found.");
         }
 
+        // Update the vendor with the business ID
         await ctx.db.patch(vendor._id, {
-            first_name: args.first_name,
-            last_name: args.last_name,
-            phone_number: args.phone_number,
-            email: args.email,
+            business_Id: args.businessId,
+            is_onboarded: true, // Once a business is linked, consider the vendor onboarded
         });
     },
 });
 
-export const updateOnboardingStatus = mutation({
-    args: {
-        isOnboarded: v.boolean(),
-    },
-    handler: async (ctx, args) => {
-        const user = await getAuthenticatedVendor(ctx);
-
-        await ctx.db.patch(user._id, {
-            is_onboarded: args.isOnboarded,
-        });
-    },
-});
-
-export const updateDOB = mutation({
+// Update vendor subscription information
+export const updateVendorSubscription = mutation({
     args: {
         clerkId: v.string(),
-        dob: v.string(),
+        stripeCustomerId: v.string(),
+        stripeSubscriptionId: v.string(),
+        subscriptionPlanId: v.string(),
+        subscriptionStatus: v.string(),
+        subscriptionCurrentPeriodEnd: v.string(),
     },
     handler: async (ctx, args) => {
         const vendor = await ctx.db
             .query("vendors")
             .withIndex("by_clerk_id", (q) => q.eq("clerkId", args.clerkId))
-            .unique();
+            .first();
 
         if (!vendor) {
-            throw new Error("Vendor not found");
+            throw new Error("Vendor not found.");
         }
 
+        // Update the vendor with subscription information
         await ctx.db.patch(vendor._id, {
-            dob: args.dob,
+            stripeCustomerId: args.stripeCustomerId,
+            stripeSubscriptionId: args.stripeSubscriptionId,
+            subscriptionPlanId: args.subscriptionPlanId,
+            subscriptionStatus: args.subscriptionStatus,
+            subscriptionCurrentPeriodEnd: args.subscriptionCurrentPeriodEnd,
+        });
+    },
+});
+
+// Get vendor by Stripe customer ID
+export const getVendorByStripeCustomerId = query({
+    args: { stripeCustomerId: v.string() },
+    handler: async (ctx, args) => {
+        return await ctx.db
+            .query("vendors")
+            .withIndex("by_stripe_customer_id", (q) =>
+                q.eq("stripeCustomerId", args.stripeCustomerId)
+            )
+            .first();
+    },
+});
+
+// Cancel vendor subscription
+export const cancelVendorSubscription = mutation({
+    args: {
+        clerkId: v.string(),
+    },
+    handler: async (ctx, args) => {
+        const vendor = await ctx.db
+            .query("vendors")
+            .withIndex("by_clerk_id", (q) => q.eq("clerkId", args.clerkId))
+            .first();
+
+        if (!vendor) {
+            throw new Error("Vendor not found.");
+        }
+
+        // Update subscription status to canceled
+        await ctx.db.patch(vendor._id, {
+            subscriptionStatus: "canceled",
         });
     },
 });

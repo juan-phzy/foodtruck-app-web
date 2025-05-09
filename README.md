@@ -22,6 +22,10 @@ FOODTRUCK-APP-WEB
 |   │       │   ├── page.module.css
 |   │       │   └── page.tsx
 │   |       └── vendor
+|   │           ├── business
+|   |           |   └── page.tsx
+|   │           ├── subscription
+|   |           |   └── page.tsx
 |   │           ├── page.module.css
 |   │           └── page.tsx
 |   ├── user
